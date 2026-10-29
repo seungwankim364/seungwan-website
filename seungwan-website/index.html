@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="클라우드 엔지니어 김승완의 이력서와 AWS, Kubernetes 프로젝트">
+<meta property="og:title" content="김승완 Cloud Engineer">
+<meta property="og:description" content="AWS와 쿠버네티스 위에서 배포 자동화와 모니터링을 주로 다룹니다.">
+<title>김승완 Cloud Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Plain resume page: one column, black and gray only, Noto Sans KR throughout. */
+:root{
+  --bg:#ffffff; --ink:#1b1b1b; --muted:#6b6b6b; --faint:#9a9a9a; --line:#e5e5e5;
+  --f-body:"Noto Sans KR","Noto Sans CJK KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161616; --ink:#ececec; --muted:#a3a3a3; --faint:#777; --line:#2c2c2c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161616; --ink:#ececec; --muted:#a3a3a3; --faint:#777; --line:#2c2c2c; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{color-scheme:light}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.35}
+p{margin:0}
+.wrap{max-width:820px;margin:0 auto}
+.mono{font-family:inherit}
+.eyebrow{display:none}
+
+body.en .ko{display:none!important}
+body:not(.en) .en{display:none!important}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)))}
+.bar .wrap{display:flex;align-items:center;gap:20px;padding:12px max(16px,env(safe-area-inset-left,0px))}
+.bar .who{font-weight:700;font-size:15px;margin-right:auto;white-space:nowrap}
+.bar .who .mono{display:none}
+.bar nav{display:flex;gap:18px;font-size:14px}
+.bar nav a{color:var(--muted);text-decoration:none}
+.bar nav a:hover{color:var(--ink)}
+.lang{display:flex;gap:2px;font-size:13px;flex-shrink:0}
+.lang button{font:inherit;background:none;border:0;color:var(--faint);padding:2px 4px;cursor:pointer}
+.lang button[aria-pressed="true"]{color:var(--ink);font-weight:700}
+.lang button+button::before{content:"|";color:var(--line);margin-right:6px}
+@media (max-width:640px){.bar nav{display:none}}
+
+/* hero */
+.hero{padding-block:64px 44px;display:grid;gap:18px}
+.hero h1{font-size:40px;font-weight:700;letter-spacing:-.02em}
+.hero h1 small{display:inline;font-size:18px;font-weight:400;color:var(--muted);margin-left:12px;letter-spacing:0}
+.thesis{font-size:20px;font-weight:500}
+.lead{color:#3d3d3d;color:color-mix(in srgb,var(--ink) 82%,var(--bg));max-width:40em}
+.facts{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:14px;color:var(--muted)}
+.chip{border:0;padding:0;background:none}
+.links{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;font-size:15px}
+.copy{font:inherit;background:none;border:0;padding:0;color:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:3px}
+.copy:hover{text-decoration-color:var(--ink)}
+
+/* sections */
+section{padding-block:44px;border-top:1px solid var(--line)}
+section > .head{margin-bottom:24px}
+section > .head h2{font-size:24px;font-weight:700}
+
+/* project overview table */
+.ptable{overflow-x:auto;margin-bottom:8px}
+.ptable table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+.ptable th{font-weight:500;font-size:13px;color:var(--muted);text-align:left;padding:8px 12px 8px 0;border-bottom:1px solid var(--ink)}
+.ptable td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.ptable td:first-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ptable a{font-weight:500;text-decoration:none}
+.ptable a:hover{text-decoration:underline}
+
+/* project */
+.proj{padding-block:40px;display:grid;gap:18px;border-top:1px solid var(--line)}
+.proj:first-of-type{border-top:0}
+.ptitle{display:grid;gap:4px}
+.ptitle h3{font-size:24px;font-weight:700}
+.ptitle .sub{font-size:16px;color:var(--muted)}
+.pmeta{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pmeta b{font-weight:400}
+.stack{font-size:14px;color:var(--muted);margin:0}
+.why{max-width:40em}
+.fig{margin:0;border:1px solid var(--line);background:#fff}
+.fig button{display:block;width:100%;padding:10px;background:#fff;border:0;cursor:zoom-in}
+.fig img{display:block;width:100%;height:auto;margin:0 auto}
+.fig.narrow img{max-width:420px}
+.fig figcaption{font-size:13px;color:#777;padding:8px 12px;border-top:1px solid #eee;background:#fff}
+.calls{display:grid;gap:16px}
+.call{display:grid;gap:2px}
+.call h4{font-size:16px;font-weight:700}
+.results h4{font-size:16px;font-weight:700;margin-bottom:4px}
+.results ul{margin:0;padding-left:1.1em;display:grid;gap:3px;max-width:42em}
+.retro{max-width:42em;color:var(--muted)}
+.retro b{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}
+
+/* rows */
+.rows{display:grid;gap:24px}
+.row{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:2px 20px}
+.row .when{font-size:14px;line-height:1.9;color:var(--muted);font-variant-numeric:tabular-nums}
+.row h3{font-size:17px;font-weight:700}
+.row .org{color:var(--muted);font-size:14px}
+.row ul{margin:6px 0 0;padding-left:1.1em;display:grid;gap:2px}
+@media (max-width:640px){.row{grid-template-columns:1fr}}
+
+.skills{display:grid}
+.skill{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:2px 20px;padding:10px 0;border-bottom:1px solid var(--line)}
+.skill:first-child{border-top:1px solid var(--line)}
+.skill h3{font-size:16px;font-weight:700}
+.skill p{font-size:15px}
+.skill .where{grid-column:2;font-size:13px;color:var(--faint)}
+.skill .where:empty{display:none}
+@media (max-width:640px){.skill{grid-template-columns:1fr}.skill .where{grid-column:1}}
+
+footer{border-top:1px solid var(--line);padding-block:28px 48px;font-size:13px;color:var(--faint);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+dialog{border:0;padding:0;max-width:min(96vw,1600px);width:96vw;background:#fff}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog img{display:block;width:100%;height:auto}
+dialog .x{position:absolute;top:8px;right:8px;font:500 13px/1 var(--f-body);background:#1b1b1b;color:#fff;border:0;padding:8px 10px;cursor:pointer}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <span class="who">김승완 <span class="mono" style="color:var(--muted);font-weight:400">Seungwan Kim</span></span>
+    <nav>
+      <a href="#projects"><span class="ko">프로젝트</span><span class="en">Projects</span></a>
+      <a href="#experience"><span class="ko">경력</span><span class="en">Experience</span></a>
+      <a href="#skills"><span class="ko">기술</span><span class="en">Skills</span></a>
+      <a href="#contact"><span class="ko">연락처</span><span class="en">Contact</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="btn-ko" type="button" aria-pressed="true">KO</button>
+      <button id="btn-en" type="button" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="hero">
+  <div class="eyebrow">Cloud Engineer &nbsp;/&nbsp; AWS &nbsp;/&nbsp; Kubernetes</div>
+  <h1>김승완<small class="mono">Seungwan Kim</small></h1>
+  <p class="thesis ko">AWS와 쿠버네티스 위에서 배포 자동화와 모니터링을 주로 다룹니다.</p>
+  <p class="thesis en">I work on deployment automation and monitoring on AWS and Kubernetes.</p>
+  <p class="lead ko">메가존클라우드 MSP 솔루션 아키텍트 과정에서 7개월 동안 프로젝트 다섯 개를 진행했습니다. EC2 3-tier로 시작해 서버리스와 온프레미스 쿠버네티스 네트워크를 거쳤고 EKS에서는 팀의 CI/CD와 모니터링을 맡았습니다. 그때 배포는 성공인데 서비스는 5xx를 내는 경우를 여러 번 겪었고 마지막 프로젝트에서는 배포 직후 지표를 보고 실패를 판정하는 파이프라인을 혼자 만들었습니다.</p>
+  <p class="lead en">Over seven months in Megazone Cloud's MSP Solutions Architect program I built five projects. I started with a 3-tier EC2 setup, moved to serverless and to networking for on-prem Kubernetes, then ran CI/CD and monitoring for a team on EKS. There I kept seeing deploys pass while the service returned 5xx. So in the last project I built, on my own, a pipeline that reads metrics right after each deploy and makes its own pass or fail call.</p>
+  <div class="facts">
+    <span class="chip">AWS SAA-C03</span>
+    <span class="chip ko">리눅스마스터 2급</span><span class="chip en">Linux Master Lv.2</span>
+    <span class="chip">TOEIC 960</span>
+    <span class="chip ko">한국어, 영어 원어민</span><span class="chip en">Korean &amp; English, native</span>
+  </div>
+  <div class="links">
+    <button class="copy" type="button" data-copy="seungwankim364@gmail.com" aria-label="이메일 복사"><span>seungwankim364@gmail.com</span></button>
+    <a href="https://github.com/seungwankim364" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://merciful-october-031.notion.site/3055bf6ee29081b8a080d434ad6faf70" target="_blank" rel="noopener"><span class="ko">노션 블로그</span><span class="en">Notion</span></a>
+    <a href="pdf/김승완_포트폴리오.pdf" class="ko" download>PDF 받기</a><a href="pdf/Seungwan_Kim_Portfolio_EN.pdf" class="en" download>Download PDF</a>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="head">
+    <div class="eyebrow">Projects</div>
+    <h2 class="ko">프로젝트</h2><h2 class="en">Projects</h2>
+  </div>
+
+  <div class="ptable">
+    <table>
+      <thead><tr><th class="ko">기간</th><th class="en">When</th><th class="ko">프로젝트</th><th class="en">Project</th><th class="ko">인원</th><th class="en">Team</th><th class="ko">맡은 일</th><th class="en">My part</th></tr></thead>
+      <tbody>
+        <tr><td>2026.05 ~ 07</td><td><a href="#p-qg">Quality Gate</a></td><td class="ko">1인</td><td class="en">Solo</td><td class="ko">설계부터 구현까지 전부</td><td class="en">Everything</td></tr>
+        <tr><td>2026.05 ~ 07</td><td><a href="#p-g2mpt">G2MPT</a></td><td class="ko">4인</td><td class="en">4</td><td class="ko">CI/CD, 모니터링</td><td class="en">CI/CD, monitoring</td></tr>
+        <tr><td>2026.03</td><td><a href="#p-fullcount">Fullcount</a></td><td class="ko">4인</td><td class="en">4</td><td class="ko">네트워크 설계, 인프라 구축</td><td class="en">Network, infrastructure</td></tr>
+        <tr><td>2026.02</td><td><a href="#p-photoshoot">Photoshoot Blog</a></td><td class="ko">1인</td><td class="en">Solo</td><td class="ko">풀스택, AWS 인프라</td><td class="en">Full-stack, AWS</td></tr>
+        <tr><td>2026.01</td><td><a href="#p-myfoodmap">MyFoodMap</a></td><td class="ko">3인</td><td class="en">3</td><td class="ko">AWS 인프라 설계, 구축</td><td class="en">AWS infrastructure</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Quality Gate -->
+  <article class="proj" id="p-qg">
+    <div class="ptitle">
+      <h3>Quality Gate</h3>
+      <p class="sub ko">AI Agent 기반 CD Quality Gate 및 장애 자동 분석 파이프라인</p>
+      <p class="sub en">CD quality gate with AI-assisted failure analysis</p>
+    </div>
+    <div class="pmeta">
+      <span><b class="ko">개인 프로젝트</b><b class="en">Solo</b></span>
+      <span>2026.05.11 ~ 07.08</span>
+    </div>
+    <p class="stack">GitHub Actions, Argo CD, Prometheus, CloudWatch, EventBridge, Lambda, Athena, Bedrock, Terraform</p>
+    <p class="why ko">G2MPT를 운영하다 보면 GitHub Actions도 성공이고 Argo CD도 Synced인데 서비스는 5xx를 내는 경우가 있었습니다. 파이프라인은 배포 작업이 끝났는지만 확인하고 있었습니다. 그래서 배포가 끝난 뒤 5분 동안 실제 지표를 보고 성공과 실패를 다시 판정하는 단계를 붙였습니다.</p>
+    <p class="why en">On G2MPT I would see GitHub Actions green and Argo CD Synced while the service returned 5xx. The pipeline only checked that the deploy job finished. So I added a step that watches real metrics for five minutes after each deploy and makes a second pass or fail call.</p>
+    <figure class="fig"><button type="button" data-zoom="d10"><img src="img/d10.webp" alt="Quality Gate 아키텍처" loading="lazy"></button>
+      <figcaption class="ko">배포 후 검증부터 Slack 승인, 롤백까지의 전체 흐름</figcaption>
+      <figcaption class="en">From post-deploy checks to Slack approval and rollback</figcaption></figure>
+    <div class="calls ko">
+      <div class="call"><h4>검증 workflow를 별도 저장소로</h4><p>검증을 배포 workflow 안에 넣으면 배포가 5분씩 길어지고 검증 쪽이 고장 나면 배포까지 막힙니다. 배포가 끝나면 Webhook이 다른 저장소의 workflow를 호출하도록 떼어 냈습니다.</p></div>
+      <div class="call"><h4>Prometheus와 CloudWatch를 같이 조회</h4><p>앱은 정상으로 응답하는데 RDS 커넥션이 바닥나는 경우도 있어서 한쪽 지표만으로는 판정할 수 없습니다. 에러율, 응답 지연, Pod 재시작은 Prometheus에서, RDS와 SQS 상태는 CloudWatch에서 가져옵니다.</p></div>
+      <div class="call"><h4>롤백은 Slack 승인 후 실행</h4><p>처음에는 롤백까지 자동으로 하려고 했습니다. 하지만 오탐 한 번에 정상 배포가 되돌아가면 그쪽이 더 큰 사고라서 Bedrock은 원인 후보와 권장 조치까지만 쓰고 실행은 Slack 버튼을 누른 뒤에 돌게 했습니다.</p></div>
+    </div>
+    <div class="calls en">
+      <div class="call"><h4>Checks live in a separate repo</h4><p>Inside the deploy workflow the check would add five minutes to every deploy, and a broken check would block releases. A webhook calls a workflow in another repo once the deploy ends.</p></div>
+      <div class="call"><h4>Prometheus and CloudWatch together</h4><p>The app can answer fine while RDS runs out of connections, so one source is not enough. Error rate, latency and pod restarts come from Prometheus, and RDS and SQS come from CloudWatch.</p></div>
+      <div class="call"><h4>Rollback waits for Slack approval</h4><p>I first planned to roll back automatically. One false positive reverting a good release is worse than the original problem, so Bedrock writes the likely cause and a suggested action, and the rollback runs only after someone presses the button in Slack.</p></div>
+    </div>
+    <div class="results ko"><h4>결과</h4><ul>
+      <li>배포가 끝나면 5분간 에러율, 응답 지연, Pod 재시작, RDS 커넥션, SQS 적체를 보고 판정</li>
+      <li>실패하면 Athena로 장애 시점 로그를 뽑아 Bedrock 분석 결과를 Grafana, Argo CD 링크와 함께 Slack으로 전송</li>
+      <li>Rollback, Manual Fix, Change Apply 세 가지 조치를 승인 버튼 하나로 실행</li>
+      <li>Lambda 4개와 EventBridge, Athena, API Gateway를 Terraform으로 관리하며 배포가 없는 동안에는 비용이 거의 발생하지 않음</li>
+    </ul></div>
+    <div class="results en"><h4>Result</h4><ul>
+      <li>Five minutes after each deploy, error rate, latency, pod restarts, RDS connections and SQS backlog decide pass or fail</li>
+      <li>On failure, Athena pulls logs from that window and Bedrock's analysis goes to Slack with Grafana and Argo CD links</li>
+      <li>Rollback, Manual Fix and Change Apply each run from a single approval button</li>
+      <li>Four Lambdas plus EventBridge, Athena and API Gateway, all in Terraform, costing next to nothing between deploys</li>
+    </ul></div>
+    <div class="retro ko"><b>아쉬운 점</b>판정이 얼마나 정확한지는 아직 숫자로 확인하지 못했습니다. 정상 배포와 일부러 실패시킨 배포를 반복해 오탐률부터 측정하고 정확도가 확인된 유형만 승인 없이 실행하도록 넓힐 계획입니다.</div>
+    <div class="retro en"><b>Open question</b>I have not measured how accurate the verdicts are. Next step is to replay good and deliberately broken deploys to get a false-positive rate, then let only proven cases run without approval.</div>
+  </article>
+
+  <!-- G2MPT -->
+  <article class="proj" id="p-g2mpt">
+    <div class="ptitle">
+      <h3>G2MPT</h3>
+      <p class="sub ko">AWS EKS 기반 AI 퍼스널 트레이닝 플랫폼</p>
+      <p class="sub en">AI personal-training platform on AWS EKS</p>
+    </div>
+    <div class="pmeta">
+      <span><b class="ko">4인 팀</b><b class="en">Team of 4</b></span>
+      <span>2026.05.11 ~ 07.08</span>
+      <span class="ko">CI/CD, 모니터링 담당</span><span class="en">CI/CD and monitoring</span>
+    </div>
+    <p class="stack">GitHub Actions, Argo CD, Helm, EKS, Karpenter, Prometheus, Grafana, CloudWatch</p>
+    <p class="why ko">사내 서버 한 대에 API, AI, 영상 분석, 리포트가 전부 올라가 있던 서비스를 EKS 마이크로서비스로 옮기는 프로젝트였습니다. 제 몫은 수동 배포와 로그도 지표도 없는 운영을 정리하는 일이었습니다. 서비스가 9개로 쪼개지니 배포만 자동화해서는 각자 다른 모양으로 올라갈 것 같아서 배포 규격과 모니터링을 같이 잡았습니다.</p>
+    <p class="why en">We moved a service that ran its API, AI, video analysis and reports on one on-prem server onto microservices on EKS. My job was to replace manual deploys and give the team the logs and metrics it never had. With nine services, automating deploys alone would have let each one ship in its own shape, so I set the deploy standard and the monitoring together.</p>
+    <figure class="fig"><button type="button" data-zoom="d24"><img src="img/d24.webp" alt="G2MPT AWS EKS 프로덕션 아키텍처" loading="lazy"></button>
+      <figcaption class="ko">ap-northeast-2 프로덕션 구성</figcaption>
+      <figcaption class="en">Production layout in ap-northeast-2</figcaption></figure>
+    <div class="calls ko">
+      <div class="call"><h4>배포는 Argo CD가</h4><p>GitHub Actions는 이미지를 ECR에 올리고 GitOps 저장소의 image tag만 바꿉니다. 클러스터 반영은 Argo CD가 맡기 때문에 CI가 클러스터 권한을 가질 필요가 없고 AWS 접근도 OIDC로 바꿔 저장소에 남는 액세스 키를 없앴습니다.</p></div>
+      <div class="call"><h4>Helm 차트 하나로 통일</h4><p>Deployment, HPA, PDB, ServiceMonitor 등 10종 리소스를 공통 템플릿으로 만들고 서비스마다 values만 다르게 넣었습니다. ServiceMonitor가 템플릿에 들어 있어서 새 서비스를 올리면 Prometheus 수집도 같이 따라옵니다.</p></div>
+      <div class="call"><h4>알림 경로 두 개</h4><p>RDS, SQS, ElastiCache, KVS는 클러스터 밖에 있어 Prometheus로는 볼 수 없습니다. Pod와 Node는 Alertmanager로, AWS 리소스는 CloudWatch에서 SNS와 Chatbot을 거쳐 같은 Slack 채널로 보냈습니다.</p></div>
+    </div>
+    <div class="calls en">
+      <div class="call"><h4>Argo CD does the deploy</h4><p>GitHub Actions pushes the image to ECR and bumps the tag in the GitOps repo. Argo CD applies it, so CI never holds cluster credentials, and AWS access moved to OIDC so no access keys sit in the repo.</p></div>
+      <div class="call"><h4>One Helm chart</h4><p>Ten resource types, including Deployment, HPA, PDB and ServiceMonitor, live in one shared template, and each service only changes its values. Because ServiceMonitor is in the template, a new service gets Prometheus scraping without extra work.</p></div>
+      <div class="call"><h4>Two alert paths</h4><p>RDS, SQS, ElastiCache and KVS sit outside the cluster where Prometheus cannot see them. Pods and nodes alert through Alertmanager, AWS resources through CloudWatch, SNS and Chatbot, both into the same Slack channel.</p></div>
+    </div>
+    <div class="results ko"><h4>결과</h4><ul>
+      <li>서비스 9개를 각자의 파이프라인으로 배포. 프로젝트 기간 workflow 실행 412회, 배포 1회 평균 2분 30초</li>
+      <li>9개 서비스 모두 GitOps로만 배포. 누가 kubectl로 직접 바꿔도 Argo CD가 Git 상태로 되돌림</li>
+      <li>팀원이 맡은 SQS, KVS까지 포함해 알림 규칙 6개 파일을 한곳에서 관리하고, Alertmanager가 죽은 경우를 잡는 규칙도 따로 둠</li>
+    </ul></div>
+    <div class="results en"><h4>Result</h4><ul>
+      <li>Nine services on nine pipelines, 412 workflow runs over the project and about 2 min 30 s per deploy</li>
+      <li>All nine deploy only through GitOps, and Argo CD reverts any manual kubectl change back to what Git says</li>
+      <li>Six alert rule files kept in one place, covering teammates' SQS and KVS too, plus rules that fire if Alertmanager itself goes down</li>
+    </ul></div>
+    <div class="retro ko"><b>배운 점</b>Helm values의 resource request를 조정하면서 이 값이 클러스터 전체 비용과 묶여 있다는 것을 알았습니다. Karpenter는 request를 보고 노드를 띄우기 때문에 넉넉하게 잡아 두면 쓰지 않는 노드가 계속 늘어납니다. 그 뒤로는 인프라 담당 팀원과 값을 맞춰 가며 조정했습니다.</div>
+    <div class="retro en"><b>What I learned</b>Tuning resource requests showed me those values drive the cost of the whole cluster. Karpenter launches nodes from requests, so generous values leave idle nodes piling up. After that I tuned them together with our infra teammate.</div>
+  </article>
+
+  <!-- Fullcount -->
+  <article class="proj" id="p-fullcount">
+    <div class="ptitle">
+      <h3>Fullcount</h3>
+      <p class="sub ko">온프레미스 쿠버네티스 기반 MLB 실시간 문자 중계 서비스</p>
+      <p class="sub en">Live MLB play-by-play on on-prem Kubernetes</p>
+    </div>
+    <div class="pmeta">
+      <span><b class="ko">4인 팀</b><b class="en">Team of 4</b></span>
+      <span>2026.03.10 ~ 03.23</span>
+      <span class="ko">네트워크, 인프라 담당</span><span class="en">Network and infrastructure</span>
+    </div>
+    <p class="stack">Kubernetes, GNS3, BGP, MetalLB, NAT/PAT, ACL, Tailscale, NFS, cert-manager</p>
+    <p class="why ko">AWS라면 ALB 하나로 끝날 일을 라우터부터 직접 구성해야 했습니다. 클라우드가 뒤에서 해 주던 일이 실제로 무엇인지 보고 싶어서 네트워크를 맡았습니다.</p>
+    <p class="why en">What an ALB does on AWS had to be built here from the routers up. I took the network part to see what the cloud had been doing for me.</p>
+    <figure class="fig"><button type="button" data-zoom="d43"><img src="img/d43.webp" alt="Fullcount GNS3 네트워크 토폴로지" loading="lazy"></button>
+      <figcaption class="ko">GNS3로 구성한 네트워크 토폴로지</figcaption>
+      <figcaption class="en">Network topology built in GNS3</figcaption></figure>
+    <div class="calls ko">
+      <div class="call"><h4>BGP로 VIP 광고</h4><p>Edge, Core, MetalLB를 각각 AS65002, 65001, 65003으로 나누고 MetalLB가 VIP를 eBGP로 광고하게 했습니다. 노드가 하나 죽으면 그 경로만 빠지고 나머지 노드로 트래픽이 갑니다.</p></div>
+      <div class="call"><h4>서비스 트래픽은 NAT 제외</h4><p>들어오는 서비스 트래픽까지 NAT을 태우면 클라이언트 IP가 사라지고 경계 라우터 한 대에 부하가 몰립니다. NAT/PAT은 관리용 아웃바운드에만 쓰고 서비스는 VIP 경로로 바로 들어오게 했습니다.</p></div>
+      <div class="call"><h4>Bastion 대신 Tailscale</h4><p>Bastion을 두면 그 서버가 또 하나의 공인 IP 노출 지점이 됩니다. 회사망에서 팀원끼리 직접 통신도 막혀 있던 터라 Tailscale로 오버레이를 깔고 VIP 대역은 서브넷 라우팅으로 열었습니다.</p></div>
+    </div>
+    <div class="calls en">
+      <div class="call"><h4>VIPs over BGP</h4><p>Edge, core and MetalLB got AS65002, 65001 and 65003, and MetalLB advertises VIPs over eBGP. If a node dies only its route drops and traffic moves to the others.</p></div>
+      <div class="call"><h4>No NAT for service traffic</h4><p>NAT on inbound traffic hides client IPs and puts all load on one edge router. NAT/PAT handles management outbound only. Service traffic comes straight in on the VIP routes.</p></div>
+      <div class="call"><h4>Tailscale instead of a bastion</h4><p>A bastion is one more public IP to defend. The office network also blocked direct traffic between our machines, so a Tailscale overlay with subnet routing for the VIP range solved both.</p></div>
+    </div>
+    <div class="results ko"><h4>결과</h4><ul>
+      <li>네트워크 대역 6개, 노드 9대, 라우터 2대, AS 3개로 구성</li>
+      <li>Core 라우터에서 Main 클러스터 인터페이스를 내렸을 때 BGP 경로가 빠지고 Backup 클러스터로 접속되는 것까지 확인</li>
+      <li>구축 중 막힌 9건을 계층별로 기록. ACL에 DNS 53번 포트 누락, Tailscale 서브넷 광고 누락, Flannel 미적용 등</li>
+    </ul></div>
+    <div class="results en"><h4>Result</h4><ul>
+      <li>Six network segments, nine nodes, two routers, three ASes</li>
+      <li>Shutting the main cluster interface on the core router withdrew its BGP route and traffic reached the backup cluster</li>
+      <li>Nine blockers logged by layer, such as DNS port 53 missing from the ACL, a missing Tailscale subnet route, Flannel not applied</li>
+    </ul></div>
+    <div class="retro ko"><b>배운 점</b>ACL 한 줄이 빠져서 DNS가 안 됐고, 서브넷 광고 설정 하나 때문에 VIP에 접속이 안 됐습니다. 클라우드에서는 보안 그룹 규칙 한 줄이던 것이 어느 계층에서 무엇을 막고 있었는지 이때 처음 직접 봤습니다. 지금은 네트워크 문제가 생기면 어느 계층에서 끊겼는지부터 좁혀 봅니다.</div>
+    <div class="retro en"><b>What I learned</b>One missing ACL line broke DNS, and one missing subnet route kept us off the VIPs. It was the first time I saw which layer a single security-group rule had been covering. Now I start network problems by finding the layer where it breaks.</div>
+  </article>
+
+  <!-- Photoshoot -->
+  <article class="proj" id="p-photoshoot">
+    <div class="ptitle">
+      <h3>Photoshoot Blog</h3>
+      <p class="sub ko">AWS 서버리스 기반 개인 사진첩 블로그</p>
+      <p class="sub en">Serverless photo blog on AWS</p>
+    </div>
+    <div class="pmeta">
+      <span><b class="ko">개인 프로젝트</b><b class="en">Solo</b></span>
+      <span>2026.02.10 ~ 02.20</span>
+    </div>
+    <p class="stack">S3, CloudFront, API Gateway, Lambda, MongoDB Atlas, React, GitHub Actions</p>
+    <p class="why ko">직전 MyFoodMap에서는 접속이 없어도 t3.micro 한 대에 매달 10달러 넘게 나갔습니다. 가끔 들어가는 사진첩에 서버를 켜 둘 이유가 없어서 이번에는 서버를 하나도 두지 않고 만들었습니다.</p>
+    <p class="why en">On MyFoodMap a single t3.micro cost over $10 a month even with nobody visiting. A photo album I open now and then did not need a server running, so this time I built it with none.</p>
+    <figure class="fig narrow"><button type="button" data-zoom="d60"><img src="img/d60.webp" alt="Photoshoot Blog 서버리스 아키텍처" loading="lazy"></button>
+      <figcaption class="ko">CloudFront 하나로 정적 파일, API, 이미지를 나눠 보냄</figcaption>
+      <figcaption class="en">One CloudFront splits static files, API and images</figcaption></figure>
+    <div class="calls ko">
+      <div class="call"><h4>CloudFront 하나로 진입</h4><p>정적 파일, /prod/* API, 이미지를 CloudFront에서 경로로 나눴습니다. 오리진이 하나라 CORS를 따로 설정할 필요가 없었고, 두 S3 버킷은 OAC를 걸어 버킷 주소로 바로 들어오지 못하게 했습니다.</p></div>
+      <div class="call"><h4>DB 커넥션 재사용</h4><p>Lambda는 요청이 몰리면 인스턴스가 늘어나는데 그때마다 핸들러 안에서 커넥션을 새로 열면 Atlas 연결 한도에 금방 닿습니다. 커넥션을 핸들러 밖으로 빼서 warm 상태일 때는 다시 쓰게 했습니다.</p></div>
+      <div class="call"><h4>프론트와 Lambda 배포 분리</h4><p>화면만 고쳤는데 백엔드까지 다시 배포될 필요는 없어서 파이프라인을 둘로 나눴습니다. 프론트 쪽 마지막에 CloudFront 캐시 무효화를 넣어 바뀐 화면이 바로 보이게 했습니다.</p></div>
+    </div>
+    <div class="calls en">
+      <div class="call"><h4>One CloudFront entry</h4><p>Static files, the /prod/* API and images are split by path in CloudFront. One origin meant no CORS setup, and both S3 buckets sit behind OAC so nobody reaches them by bucket URL.</p></div>
+      <div class="call"><h4>Reused DB connections</h4><p>Lambda scales out under load, and opening a connection inside the handler each time hits the Atlas limit fast. The connection lives outside the handler and is reused while warm.</p></div>
+      <div class="call"><h4>Separate frontend and Lambda deploys</h4><p>A UI fix should not redeploy the backend, so there are two pipelines. The frontend one ends with a CloudFront invalidation so changes show up right away.</p></div>
+    </div>
+    <div class="results ko"><h4>결과</h4><ul>
+      <li>상시 실행되는 서버가 없어 요청이 없으면 비용이 거의 발생하지 않음</li>
+      <li>회원가입, JWT 로그인, 사진 업로드와 수정, 삭제, 날짜순 정렬까지 11일 동안 혼자 구현하고 배포</li>
+      <li>프론트와 Lambda 모두 GitHub Actions로 배포</li>
+    </ul></div>
+    <div class="results en"><h4>Result</h4><ul>
+      <li>No always-on server, so with no requests the cost is close to zero</li>
+      <li>Sign-up, JWT login, photo upload, edit, delete and date sorting built and shipped alone in 11 days</li>
+      <li>Frontend and Lambda both deploy through GitHub Actions</li>
+    </ul></div>
+    <div class="retro ko"><b>다시 만든다면</b>이미지 업로드가 아직 Lambda를 거칩니다. API Gateway 페이로드 제한과 Lambda 실행 비용을 생각하면 Presigned URL로 브라우저에서 S3에 바로 올리는 방식이 맞고 다음에는 업로드 경로부터 분리하겠습니다.</div>
+    <div class="retro en"><b>If I built it again</b>Uploads still go through Lambda. Given API Gateway's payload limit and Lambda cost, presigned URLs straight to S3 fit better, and that is the first thing I would change.</div>
+  </article>
+
+  <!-- MyFoodMap -->
+  <article class="proj" id="p-myfoodmap">
+    <div class="ptitle">
+      <h3>MyFoodMap</h3>
+      <p class="sub ko">AWS 3-tier 맛집 기록 웹 서비스</p>
+      <p class="sub en">3-tier restaurant journal on AWS</p>
+    </div>
+    <div class="pmeta">
+      <span><b class="ko">3인 팀</b><b class="en">Team of 3</b></span>
+      <span>2026.01.26 ~ 01.29</span>
+      <span class="ko">AWS 인프라 담당</span><span class="en">AWS infrastructure</span>
+    </div>
+    <p class="stack">S3, CloudFront, ALB, ASG, CodeDeploy, React, Node.js, MySQL</p>
+    <p class="why ko">지도에 내가 간 맛집과 리뷰를 쌓아 두는 서비스입니다. 처음에는 프론트, 백엔드, DB가 EC2 한 대씩이라 어느 하나만 죽어도 서비스가 멈췄고 배포도 손으로 했습니다.</p>
+    <p class="why en">A map of the restaurants you have been to, with your own reviews. At first frontend, backend and DB each ran on one EC2 instance, so any single failure stopped the service, and deploys were manual.</p>
+    <figure class="fig"><button type="button" data-zoom="d74"><img src="img/d74.webp" alt="MyFoodMap 개선 아키텍처" loading="lazy"></button>
+      <figcaption class="ko">ALB와 ASG, 서브넷 분리를 적용한 뒤의 구성</figcaption>
+      <figcaption class="en">After adding ALB, ASG and split subnets</figcaption></figure>
+    <div class="calls ko">
+      <div class="call"><h4>프론트를 S3로</h4><p>EC2와 Nginx로 서빙하던 프론트를 S3와 CloudFront로 옮기고 OAC와 HTTPS를 붙였습니다.</p></div>
+      <div class="call"><h4>백엔드를 2개 AZ로</h4><p>백엔드를 ALB 뒤 Auto Scaling Group으로 두 AZ에 나눠 두고, Public과 Private 서브넷을 갈라 앱과 DB에는 밖에서 바로 들어올 수 없게 했습니다.</p></div>
+      <div class="call"><h4>이미지를 S3로</h4><p>리뷰 사진이 EC2 디스크에 있으면 새로 뜬 인스턴스에서는 그 사진이 안 보입니다. ASG를 붙이려면 이미지부터 S3로 빼야 했습니다.</p></div>
+    </div>
+    <div class="calls en">
+      <div class="call"><h4>Frontend to S3</h4><p>Moved the frontend from EC2 and Nginx to S3 and CloudFront, with OAC and HTTPS.</p></div>
+      <div class="call"><h4>Backend across two AZs</h4><p>The backend runs in an Auto Scaling Group behind an ALB across two AZs, with public and private subnets so the app and DB cannot be reached from outside.</p></div>
+      <div class="call"><h4>Images to S3</h4><p>Review photos on an EC2 disk are invisible to a newly launched instance. The ASG only worked once images moved to S3.</p></div>
+    </div>
+    <div class="results ko"><h4>결과</h4><ul>
+      <li>프론트는 GitHub Actions에서 S3와 CloudFront로, 백엔드는 S3와 CodeDeploy로 자동 배포해 수동 배포를 없앰</li>
+      <li>백엔드 인스턴스 하나가 죽어도 다른 AZ에서 계속 응답</li>
+      <li>4일 동안 초기 구성부터 개선 구성까지 진행</li>
+    </ul></div>
+    <div class="results en"><h4>Result</h4><ul>
+      <li>Frontend ships through GitHub Actions to S3 and CloudFront and the backend through S3 and CodeDeploy, so nothing is deployed by hand</li>
+      <li>If one backend instance dies, the other AZ keeps serving</li>
+      <li>From the first setup to the revised one in four days</li>
+    </ul></div>
+    <div class="retro ko"><b>배운 점</b>ASG를 붙이고 나서야 이미지를 왜 S3에 둬야 하는지 알았습니다. 그 뒤 프로젝트부터는 상태를 어디에 둘지를 먼저 정하고 서버 구성을 짭니다. DB는 아직 EC2 한 대에 있어서 RDS Multi-AZ로 옮기는 것이 남은 과제입니다.</div>
+    <div class="retro en"><b>What I learned</b>Only after adding the ASG did I see why images had to be in S3. Since then I decide where state lives before laying out servers. The DB still sits on one EC2 instance, and moving it to RDS Multi-AZ is what is left.</div>
+  </article>
+</section>
+
+<section id="experience">
+  <div class="head"><div class="eyebrow">Experience &amp; Education</div><h2 class="ko">경력과 교육</h2><h2 class="en">Experience &amp; education</h2></div>
+  <div class="rows">
+    <div class="row"><div class="when">2025.12 ~ 2026.07</div><div>
+      <h3 class="ko">메가존클라우드 MSP 솔루션 아키텍트 교육과정</h3><h3 class="en">Megazone Cloud, MSP Solutions Architect Program</h3>
+      <ul class="ko"><li>Linux, 네트워크 기초와 AWS 기반 클라우드 아키텍처 설계</li><li>Docker, Kubernetes 기반 컨테이너 운영과 Terraform IaC</li><li>GitHub Actions, Jenkins CI/CD와 Prometheus, Grafana 모니터링</li><li>위 다섯 개 프로젝트 수행</li></ul>
+      <ul class="en"><li>Linux and networking fundamentals, AWS architecture design</li><li>Containers on Docker and Kubernetes, IaC with Terraform</li><li>CI/CD with GitHub Actions and Jenkins, monitoring with Prometheus and Grafana</li><li>Delivered the five projects above</li></ul>
+    </div></div>
+    <div class="row"><div class="when">2024.02 ~ 2025.08</div><div>
+      <h3 class="ko">대한민국 육군, K-9 자주포 포반장</h3><h3 class="en">Republic of Korea Army, K-9 Gun Section Chief</h3>
+      <p class="org ko">수도기계화보병사단 / 해외 영주권자 신분으로 자진 입대</p><p class="org en">Capital Mechanized Infantry Division / Volunteered while holding overseas permanent residency</p>
+      <ul class="ko"><li>포반원의 안전과 사격 임무 수행을 책임지는 포반장</li><li>대대 실사격 최고 점수 기록, 전 사격 임무 무사고 완수</li></ul>
+      <ul class="en"><li>Led a gun crew, accountable for crew safety and fire missions</li><li>Top live-fire score in the battalion, with every mission completed without a safety incident</li></ul>
+    </div></div>
+    <div class="row"><div class="when">2023.09 ~ 2024.02</div><div>
+      <h3 class="ko">시지바이오</h3><h3 class="en">CGBIO</h3>
+      <p class="org ko">인체조직 품질관리, SOP 운영, 해외영업</p><p class="org en">Human-tissue quality control, SOP operations, overseas sales</p>
+      <ul class="ko"><li>해외 인체조직 공급업체와의 미팅 주도, 신규 공급업체 계약 체결</li><li>SOP 기준 검수와 제조 프로세스 확인, SOP 문서 검토와 한영 통번역</li><li>외부 감사 통역 대응과 시정조치(CAPA) 작성</li></ul>
+      <ul class="en"><li>Led meetings with overseas suppliers and closed a contract with a new one</li><li>Checked inspection and manufacturing against SOPs, and reviewed and translated SOPs between Korean and English</li><li>Interpreted for external audits and drafted CAPA reports</li></ul>
+    </div></div>
+    <div class="row"><div class="when">2016.09 ~ 2023.04</div><div>
+      <h3>University of Waterloo</h3>
+      <p class="org ko">Honours Science 졸업 / Waterloo, ON, Canada</p><p class="org en">BSc, Honours Science / Waterloo, ON, Canada</p>
+      <ul class="ko"><li>2020.05 ~ 2023.08 초중고 학생 대상 영어 과외. 학생마다 강약점을 분석해 발음부터 에세이 첨삭까지 맞춤 지도</li></ul>
+      <ul class="en"><li>2020.05 ~ 2023.08 English tutor for elementary to high-school students, from pronunciation to essay editing</li></ul>
+    </div></div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="head"><div class="eyebrow">Certifications &amp; Award</div><h2 class="ko">자격증과 수상</h2><h2 class="en">Certifications &amp; award</h2></div>
+  <div class="rows">
+    <div class="row"><div class="when">2026.10.02</div><div><h3 class="ko">리눅스마스터 2급</h3><h3 class="en">Linux Master Level 2</h3><p class="org ko">한국정보통신진흥협회</p><p class="org en">Korea Association for AI &amp; ICT Promotion</p></div></div>
+    <div class="row"><div class="when">2026.09.04</div><div><h3>AWS Certified Solutions Architect, Associate</h3><p class="org">Amazon Web Services</p></div></div>
+    <div class="row"><div class="when">2025.08.04</div><div><h3 class="ko">병역이행 명예증서</h3><h3 class="en">Certificate of Honor for Military Service</h3><p class="org ko">병무청 / 해외 영주권자 신분으로 자진 입대해 받은 표창</p><p class="org en">Military Manpower Administration / for volunteering while a permanent resident abroad</p></div></div>
+    <div class="row"><div class="when">2024.05</div><div><h3>TOEIC 960</h3></div></div>
+    <div class="row"><div class="when">2023.05</div><div><h3>Introduction to Python 3, Introduction to SQL</h3><p class="org">WatSPEED, University of Waterloo</p></div></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="head"><div class="eyebrow">Skills</div><h2 class="ko">기술</h2><h2 class="en">Skills</h2></div>
+  <div class="skills">
+    <div class="skill"><h3>AWS</h3><p>VPC, EKS, ECR, S3, CloudFront, ALB/ASG, Lambda, API Gateway, EventBridge, Athena, Bedrock, CodeDeploy</p><span class="where ko">5개 프로젝트 전반</span><span class="where en">All five projects</span></div>
+    <div class="skill"><h3>Kubernetes</h3><p class="ko">EKS와 온프레미스 클러스터 운영, Helm 차트 표준화(10종 리소스), HPA, PDB, NetworkPolicy, ExternalSecret</p><p class="en">EKS and on-prem clusters, standardized Helm chart (10 resource types), HPA, PDB, NetworkPolicy, ExternalSecret</p><span class="where">G2MPT, Fullcount</span></div>
+    <div class="skill"><h3>CI/CD</h3><p class="ko">GitHub Actions 파이프라인 9종 설계, Argo CD GitOps, OIDC 임시 자격증명, CodeDeploy</p><p class="en">Nine GitHub Actions pipelines, Argo CD GitOps, OIDC short-lived credentials, CodeDeploy</p><span class="where">G2MPT, Quality Gate, MyFoodMap</span></div>
+    <div class="skill"><h3 class="ko">모니터링</h3><h3 class="en">Monitoring</h3><p class="ko">Prometheus 알림 규칙 설계, Grafana 대시보드, Alertmanager, CloudWatch와 Athena 로그 분석</p><p class="en">Prometheus alert rules, Grafana dashboards, Alertmanager, CloudWatch and Athena log analysis</p><span class="where">G2MPT, Quality Gate</span></div>
+    <div class="skill"><h3 class="ko">네트워크</h3><h3 class="en">Network</h3><p class="ko">BGP/MetalLB L3 로드밸런싱, NAT/PAT와 ACL 보안 정책, GNS3 라우터 구성, Tailscale</p><p class="en">BGP/MetalLB L3 load balancing, NAT/PAT and ACL policy, GNS3 routers, Tailscale</p><span class="where">Fullcount</span></div>
+    <div class="skill"><h3>IaC</h3><p class="ko">Terraform 기반 AWS 서버리스 인프라 코드화</p><p class="en">AWS serverless infrastructure in Terraform</p><span class="where">Quality Gate</span></div>
+    <div class="skill"><h3>Linux</h3><p class="ko">온프레미스 쿠버네티스 호스트 구성과 운영, 패키지 관리, NFS 스토리지</p><p class="en">Hosts behind on-prem Kubernetes, package management, NFS storage</p><span class="where ko">리눅스마스터 2급</span><span class="where en">Linux Master Lv.2</span></div>
+    <div class="skill"><h3 class="ko">기타</h3><h3 class="en">Other</h3><p>Docker, Jenkins, NFS, cert-manager, MongoDB Atlas, MySQL/Prisma, Redis</p><span class="where ko">전반</span><span class="where en">Across projects</span></div>
+    <div class="skill"><h3 class="ko">언어</h3><h3 class="en">Languages</h3><p class="ko">한국어 원어민, 영어 원어민(TOEIC 960), 프랑스어 중급</p><p class="en">Korean (native), English (native, TOEIC 960), French (intermediate)</p><span class="where"></span></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="head"><div class="eyebrow">Contact</div><h2 class="ko">연락처</h2><h2 class="en">Contact</h2></div>
+  <div class="links" style="font-size:16px">
+    <button class="copy" type="button" data-copy="seungwankim364@gmail.com" aria-label="이메일 복사"><span>seungwankim364@gmail.com</span></button>
+    <span class="ko" style="color:var(--muted);font-size:14px" data-status>눌러서 복사</span><span class="en" style="color:var(--muted);font-size:14px" data-status-en>Click to copy</span>
+    <a href="https://github.com/seungwankim364" target="_blank" rel="noopener">github.com/seungwankim364</a>
+    <a href="https://merciful-october-031.notion.site/3055bf6ee29081b8a080d434ad6faf70" target="_blank" rel="noopener"><span class="ko">노션 블로그</span><span class="en">Notion page</span></a>
+  </div>
+</section>
+
+<footer><span>김승완 Seungwan Kim</span><span class="ko">마지막 업데이트 2026.10</span><span class="en">Last updated 2026.10</span></footer>
+</main>
+
+<dialog id="zoom"><button class="x" type="button" id="zoom-x">닫기 ESC</button><img id="zoom-img" alt=""></dialog>
+
+<script>
+(function(){
+  var b=document.body, ko=document.getElementById('btn-ko'), en=document.getElementById('btn-en');
+  function set(l){
+    b.classList.toggle('en',l==='en'); document.documentElement.lang=l;
+    ko.setAttribute('aria-pressed',l!=='en'); en.setAttribute('aria-pressed',l==='en');
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  var init='ko'; try{init=localStorage.getItem('lang')||'ko'}catch(e){}
+  if(location.hash==='#en') init='en';
+  set(init);
+  ko.onclick=function(){set('ko')}; en.onclick=function(){set('en')};
+
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var t=btn.getAttribute('data-copy'), span=btn.querySelector('span');
+      function sel(){var r=document.createRange();r.selectNodeContents(span);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(t).then(function(){var o=span.textContent;span.textContent=b.classList.contains('en')?'Copied':'복사했습니다';setTimeout(function(){span.textContent=o},1400)},sel);
+      } else sel();
+    });
+  });
+
+  var dlg=document.getElementById('zoom'), zi=document.getElementById('zoom-img');
+  document.querySelectorAll('[data-zoom]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var img=btn.querySelector('img'); zi.src=img.src; zi.alt=img.alt;
+      if(dlg.showModal) dlg.showModal();
+    });
+  });
+  document.getElementById('zoom-x').onclick=function(){dlg.close()};
+  dlg.addEventListener('click',function(e){if(e.target===dlg) dlg.close()});
+})();
+</script>
+
+</body>
+</html>
